@@ -1,11 +1,7 @@
 environment = {"+": lambda x, y: x + y, "-": lambda x, y: x - y,
 			"define": lambda name, value: environment.update({name: value})}
 
-def find_val(value):
-	if value in environment:
-		return environment[value]
-	else:
-		return value
+find_val = lambda value: environment.get(value, value)
 
 def eval_(code):
 	if isinstance(code, list):
