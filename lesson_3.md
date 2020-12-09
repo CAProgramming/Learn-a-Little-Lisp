@@ -1,6 +1,6 @@
 ![Image 1](https://toggl.com/blog/wp-content/uploads/2019/07/programming-explained-with-music-toggl.jpg)
 
-## Quote, eval, and implementing car, cdr, cons, and lambda
+## Code -> Data, or Data -> Code
 
 `quote`
 
@@ -10,6 +10,7 @@
 - Symbols are a little tricky to understand! Think of a symbol like this: a symbol is a data object that has two properties: a print name and a numerical constant associated with that string. Since there is an unique number for each symbol, symbols can be compared very effeciently with `eq?`. You can print it out with `display`.
 - If you run `quote` on anything it will be treated as a symbol and it will bypass normal evaluation.
 - If you want to save even more space you can use a single tickmark to indicate `quote`, like this: `'x`, instead of `quote x`.
+- Summary: `quote` turns code into data (an s-expression) by skipping its evaluation.
 
 `eval`
 
@@ -23,6 +24,8 @@
 > x
 5
 ```
+
+- Summary: `eval` takes data (something quoted) and executes it as code.
 
 ![Image 2](https://lh3.googleusercontent.com/proxy/oZrDePo7fgYO0erTMO3YPrqG3GZP3-Uj5V0CfOWCd-ZKuYDOS4H0AKedzAjGlkJCuZvzGf4hrQOSwOuBcoAnmUEBZfQb6_W8q561kS-grhbFQj0FzU6Y9uvQ9HS7)
 
@@ -57,14 +60,25 @@
 
 - Internally, `(list 1 2 3 4 5)` makes a list that actually looks like `(1 (2 (3 (4 (5 nil)))))`. Nifty!
 
-- Let's implement `car`, `cdr`, and `cons` in the interpreter. Let's do `lambda`, too, just for fun. (reminder: `lambda` constructs function objects that don't need to be bound to a name.)
+- Let's implement these constructs:
+`car`
+`cdr`
+`cons`
+`quote`
+`if`
+`lambda`
+`atom?`
+`eq?`
+`null?`
+`display`
+`quote`
 
-- `quote`, `if`, `lambda`, `atom?`, `eq?`, `display`, `quote`
+- This might seem like a lot, but with Python it's actually pretty easy. I'll explain the constructs as we're implementing them.
 
 ## A tiny programming language
 
 What we have done:
-- `car`, `cdr`, `cons`, `define`, `if`, `lambda`, `atom?`, `eq?`, `display`, `quote`
+- `car`, `cdr`, `cons`, `define`, `if`, `lambda`, `atom?`, `eq?`, `null?` `display`, `quote`
 
 - With just these constructs, we can
 1. Make data structures
@@ -73,8 +87,11 @@ What we have done:
 4. Make functions
 5. Check an object's datatype
 6. See if two objects are the same
-7. Print an object
-8. Manipulate code as data: metaprogramming
+7. Recursively go through lists
+8. Print an object
+9. Manipulate code as data: metaprogramming
+
+- Let's celebrate by writing a factorial function.
 
 - That's all you really need for a progamming language! No more than 70 lines of Python.
 - I hope that you took something good away from this series of Lisp lessons. Farewell, fellow Lispers!

@@ -1,8 +1,5 @@
 ## Get ready for some more Lisp:
 
-### Overview:
-- `define`, `car`, `cdr`, and `cons`
-
 `define` 
 
 For variables:
@@ -18,12 +15,8 @@ For functions:
 (define (f x) (+ x 1))
 (define (second-elem lst) (car (cdr lst)))
 ```
-
 - `car`, `cdr`, and `cons`
 
-### Today you'll learn these things:
-- `lambda`, `quote` and `'`, `eval`, `cond`
-- `atom?`, `null?`, `eq?`, `equal?`
 
 `lambda`
 

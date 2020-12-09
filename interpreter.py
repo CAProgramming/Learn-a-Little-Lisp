@@ -1,17 +1,18 @@
 from copy import deepcopy
 
 environment = {
-			"+": lambda x, y: x + y,
-			"-": lambda x, y: x - y,
-			"*": lambda x, y: x * y,
-			"/": lambda x, y: x / y,
-			"display": print,
-			"define": lambda name, value: environment.update({name: value}),
-			"cons": lambda a, b: [a, b],
-			"car": lambda pair: pair[0],
-			"cdr": lambda pair: pair[1],
-			"atom?": lambda obj: not isinstance(obj, list),
-			"eq?": lambda a, b: a == b
+	"+": lambda x, y: x + y,
+	"-": lambda x, y: x - y,
+	"*": lambda x, y: x * y,
+	"/": lambda x, y: x / y,
+	"display": print,
+	"define": lambda name, value: environment.update({name: value}),
+	"cons": lambda a, b: [a, b],
+	"car": lambda pair: pair[0],
+	"cdr": lambda pair: pair[1],
+	"atom?": lambda obj: not isinstance(obj, list),
+	"eq?": lambda a, b: a == b,
+	"null?": lambda l: l == []
 }
 
 class Procedure:
@@ -21,11 +22,12 @@ class Procedure:
 	def __call__(self, *args):
 		global environment
 		before_call = deepcopy(environment)
-		for name, val in dict(zip(self.args, args)).items():
-			environment[name] = val
+		environment.update(dict(zip(self.args, args)))
 		result = eval_(self.body)
 		environment = before_call
 		return result
+	def __str__(self):
+		return "#<procedure>"
 
 find_val = lambda value: environment.get(value, value)
 
