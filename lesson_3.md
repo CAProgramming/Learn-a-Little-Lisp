@@ -91,7 +91,7 @@ What we have done:
 8. Print an object
 9. Manipulate code as data: metaprogramming
 
-- Let's celebrate by writing a factorial function.
+- Let's celebrate by writing `map`, `filter`, and `reduce`.
 
-- That's all you really need for a progamming language! No more than 70 lines of Python.
+- That's all you really need for a progamming language! All in under 100 lines of Python.
 - I hope that you took something good away from this series of Lisp lessons. Farewell, fellow Lispers!
