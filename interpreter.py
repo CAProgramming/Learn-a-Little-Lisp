@@ -43,13 +43,13 @@ def eval_(code):
 	else:
 		return find_val(code)
 
-tokenize = lambda expr: expr.replace("(", " ( ").replace(")", " ) ").split()
+def tokenize(expr):
+	return expr.replace("(", " ( ").replace(")", " ) ").split()
 
 def parse(tokens):
 	if not tokens:
 		return
-	curr = tokens.pop(0)
-	if curr == "(":
+	elif (curr := tokens.pop(0)) == "(":
 		ast = []
 		while tokens[0] != ")":
 			ast.append(parse(tokens))
@@ -62,6 +62,9 @@ def parse(tokens):
 			try: return float(curr)
 			except ValueError: return str(curr)
 
+def interpret(code):
+	return eval_(parse(tokenize(code)))
+
 if len(sys.argv) > 1:
 	with open(sys.argv[1], "r") as script:
 		expr, l, r = "", 0, 0
@@ -72,9 +75,9 @@ if len(sys.argv) > 1:
 			expr += c
 
 			if l == r and l != 0:
-				eval_(parse(tokenize(expr)))
+				interpret(expr)
 				expr = ""
 else:
 	while True:
-		if (result := eval_(parse(tokenize(input("> "))))) is not None:
+		if (result := interpret(input("> "))) is not None:
 			print(result)
