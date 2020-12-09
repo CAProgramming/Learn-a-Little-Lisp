@@ -53,28 +53,4 @@ def f(x):
 
 - Feel free to try this out! It can be a little tricky to grok at first but you'll get the hang of it.
 
-`quote`
-
-- Lisp interpreters read data objects one-by-one. For example, in the s-expression `(+ x 3)`, a Lisp interpreter would know that the variable x and 3 are summed. But what if I wanted to avoid evaluation of something? That's where `quote` comes in.
-
-- If I wrote `(+ (quote x) 3)`, that wouldn't work. X is no longer a variable. It is another datatype called a symbol.
-- Symbols are a little tricky to understand! Think of a symbol like this: a symbol is a data object that has two properties: a print name and a numerical constant associated with that string. Since there is an unique number for each symbol, symbols can be compared very effeciently with `eq?`. You can print it out with `display`.
-- If you run `quote` on anything it will be treated as a symbol and it will bypass normal evaluation.
-- If you want to save even more space you can use a single tickmark to indicate `quote`, like this: `'x`, instead of `quote x`.
-
-`eval`
-
-- This one is super cool but very unsafe!
-- What if you wanted to take some symbols and evaluate them as Lisp code?
-- This is like the opposite of `quote`. `quote` skips evaluation and `eval` forces evaluation.
-- Here's an example:
-
-```scheme
-> (eval '(define x 5))
-> x
-5
-```
-
-- Try this out and have fun with it!
-
 - Let's do some practical stuff now! Try to write a recursive factorial function.
