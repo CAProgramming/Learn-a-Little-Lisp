@@ -1,4 +1,4 @@
-from copy import deepcopy
+from copy import deepcopy; import sys
 
 environment = {
 	"+": lambda x, y: x + y,
@@ -43,8 +43,10 @@ def eval_(code):
 	else:
 		return find_val(code)
 
+tokenize = lambda expr: expr.replace("(", " ( ").replace(")", " ) ").split()
+
 def parse(tokens):
-	if tokens == []:
+	if not tokens:
 		return
 	curr = tokens.pop(0)
 	if curr == "(":
@@ -60,9 +62,19 @@ def parse(tokens):
 			try: return float(curr)
 			except ValueError: return str(curr)
 
-while True:
-	response = input("> ").replace("(", " ( ").replace(")", " ) ")
-	tokens = response.split()
-	as_a_tree = parse(tokens)
-	if (result := eval_(as_a_tree)) is not None:
-		print(result)
+if len(sys.argv) > 1:
+	with open(sys.argv[1], "r") as script:
+		expr, l, r = "", 0, 0
+
+		for c in script.read():
+			if c == "(": l += 1
+			elif c == ")": r += 1
+			expr += c
+
+			if l == r and l != 0:
+				eval_(parse(tokenize(expr)))
+				expr = ""
+else:
+	while True:
+		if (result := eval_(parse(tokenize(input("> "))))) is not None:
+			print(result)
